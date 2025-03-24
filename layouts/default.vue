@@ -18,29 +18,46 @@ function toggleNavbar() {
         </div>
         <ul class="navbar-items">
           <li class="navbar-item navbar-item-active">
-            <IconsIconNavOverview /><span class="menu-item-text">Overview</span>
-          </li>
-          <li class="navbar-item">
-            <IconsIconNavTransactions /><span class="menu-item-text"
-              >Transactions</span
+            <NuxtLink to="/" class="navbar-link">
+              <IconsIconNavOverview /><span class="navbar-item-text"
+                >Overview</span
+              ></NuxtLink
             >
           </li>
           <li class="navbar-item">
-            <IconsIconNavBudgets /><span class="menu-item-text">Budgets</span>
+            <NuxtLink to="/transactions" class="navbar-link">
+              <IconsIconNavTransactions /><span
+                to="/transactions"
+                class="navbar-item-text"
+                >Transactions</span
+              >
+            </NuxtLink>
           </li>
           <li class="navbar-item">
-            <IconsIconNavPots /><span class="menu-item-text">Pots</span>
+            <NuxtLink to="/budgets" class="navbar-link">
+              <IconsIconNavBudgets />
+              <div to="/budgets" class="navbar-item-text">Budgets</div>
+            </NuxtLink>
           </li>
           <li class="navbar-item">
-            <IconsIconNavRecurringBills /><span class="menu-item-text"
-              >Recurring Bills</span
-            >
+            <NuxtLink to="/pots" class="navbar-link">
+              <IconsIconNavPots />
+              <div to="/pots" class="navbar-item-text">Pots</div>
+            </NuxtLink>
+          </li>
+          <li class="navbar-item">
+            <NuxtLink to="/recurring" class="navbar-link">
+              <IconsIconNavRecurringBills />
+              <div to="/recurring" class="navbar-item-text">
+                Recurring Bills
+              </div>
+            </NuxtLink>
           </li>
         </ul>
         <button class="navbar-hide navbar-item" @click="toggleNavbar">
           <IconsIconCaretRight v-if="navbarHidden" />
           <IconsIconMinimizeMenu v-else />
-          <span class="menu-item-text">Minimize Menu</span>
+          <span class="navbar-item-text">Minimize Menu</span>
         </button>
       </nav>
     </aside>
@@ -64,6 +81,7 @@ function toggleNavbar() {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 1.5rem 0.75rem 1.5rem 0;
+  user-select: none;
 }
 
 .lateral-bar-collapsed {
@@ -71,7 +89,7 @@ function toggleNavbar() {
   min-width: unset;
 }
 
-.lateral-bar-collapsed .menu-item-text {
+.lateral-bar-collapsed .navbar-item-text {
   display: none;
 }
 
@@ -100,23 +118,27 @@ function toggleNavbar() {
 }
 
 .navbar-item {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-weight: bold;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 1rem 1.25rem 1rem 1.75rem;
   font-size: 0.875rem;
 }
 
-.navbar-item svg {
+.navbar-link {
+  padding: 1rem 1.25rem 1rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.navbar-link svg {
   width: 16px;
   min-width: 16px;
 }
 
-.navbar-item:hover {
+.navbar-link:hover {
   color: white;
 }
 
@@ -124,7 +146,11 @@ function toggleNavbar() {
   background-color: var(--color-navbar-background-bright);
   color: var(--color-text-secondary);
   border-left: 3px solid var(--color-navbar-highlight);
-  cursor: unset;
+  cursor: default;
+}
+
+.navbar-item-active .navbar-item-text {
+  color: var(--color-text-secondary);
 }
 
 .navbar-item-active svg {
@@ -136,10 +162,18 @@ function toggleNavbar() {
 }
 
 .navbar-hide {
+  padding: 1rem 1.25rem 1rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1rem;
   border: none;
   background-color: transparent;
   color: var(--color-text-primary);
+}
+
+.navbar-hide:hover {
+  color: white;
 }
 
 .lateral-bar-collapsed .navbar-hide svg {
