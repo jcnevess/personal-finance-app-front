@@ -1,29 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --color-navbar-background-dark: hsl(252, 7%, 13%);
+  --color-navbar-background-bright: hsl(38, 36%, 96%);
+  --color-navbar-highlight: hsl(176, 46%, 35%);
+  --color-text-primary: hsl(0, 0%, 70%);
+  --color-text-secondary: black;
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 @font-face {
   font-family: "PublicSans";
-  src: url("../fonts/PublicSans-Regular.ttf") format("truetype");
+  src: url("/fonts/PublicSans-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PublicSans";
-  src: url("../fonts/PublicSans-Bold.ttf") format("truetype");
+  src: url("/fonts/PublicSans-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
-body {
+body,
+ul {
   font-family: "PublicSans", sans-serif;
-}
-
-.scroll {
-  overflow-x: scroll;
-  overflow-x: hidden;
-  scrollbar-color: fff #ececec;
-  scrollbar-width: thin;
-  padding-right: 4px;
+  margin: 0;
+  padding: 0;
 }
