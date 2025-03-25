@@ -14,7 +14,7 @@ function toggleNavbar() {
     >
       <nav class="navbar">
         <div class="navbar-logo">
-          <LogoComponent :small-size="navbarHidden" />
+          <LogoFinance :small-size="navbarHidden" />
         </div>
         <ul class="navbar-items">
           <li class="navbar-item navbar-item-active">
@@ -74,7 +74,7 @@ function toggleNavbar() {
 }
 
 .lateral-bar {
-  background-color: var(--color-navbar-background-dark);
+  background-color: var(--color-background-dark);
   color: var(--color-text-primary);
   width: 20%;
   min-width: 200px;
@@ -143,9 +143,9 @@ function toggleNavbar() {
 }
 
 .navbar-item-active {
-  background-color: var(--color-navbar-background-bright);
+  background-color: var(--color-background-bright);
   color: var(--color-text-secondary);
-  border-left: 3px solid var(--color-navbar-highlight);
+  border-left: 3px solid var(--color-highlight);
   cursor: default;
 }
 
@@ -154,7 +154,7 @@ function toggleNavbar() {
 }
 
 .navbar-item-active svg {
-  color: var(--color-navbar-highlight);
+  color: var(--color-highlight);
 }
 
 .navbar-item-active:hover {
@@ -174,6 +174,7 @@ function toggleNavbar() {
 
 .navbar-hide:hover {
   color: white;
+  background-image: unset;
 }
 
 .lateral-bar-collapsed .navbar-hide svg {
@@ -183,6 +184,7 @@ function toggleNavbar() {
 .contents {
   padding: 2rem;
   flex-grow: 1;
+  background-color: var(--color-background-bright);
 }
 
 @media (max-width: 768px) {

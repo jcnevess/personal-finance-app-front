@@ -1,17 +1,11 @@
 :root {
-  --color-navbar-background-dark: hsl(252, 7%, 13%);
-  --color-navbar-background-bright: hsl(38, 36%, 96%);
-  --color-navbar-highlight: hsl(176, 46%, 35%);
+  --color-background-dark: hsl(252, 7%, 13%);
+  --color-background-bright: hsl(38, 36%, 96%);
+  --color-highlight: hsl(176, 46%, 35%);
   --color-text-primary: hsl(0, 0%, 70%);
   --color-text-secondary: black;
-}
-
-*,
-*:after,
-*:before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --color-text-paragraph: hsl(0, 0%, 41%);
+  --color-destructive-action: hsl(7, 58%, 50%);
 }
 
 @font-face {
@@ -28,9 +22,56 @@
   font-style: normal;
 }
 
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body,
 ul {
   font-family: "PublicSans", sans-serif;
   margin: 0;
   padding: 0;
+}
+
+p {
+  color: var(--color-text-paragraph);
+}
+
+h2 {
+  font-size: 1.15rem;
+}
+
+button {
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+dialog {
+  margin: auto;
+  border: none;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+button:hover,
+button:active {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  );
+  background-blend-mode: overlay;
+}
+
+.destructive-button {
+  background-color: var(--color-destructive-action);
+  color: white;
 }
