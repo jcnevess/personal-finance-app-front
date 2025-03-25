@@ -3,6 +3,10 @@ import type { Pot } from "~/helpers/DTO";
 
 const props = defineProps<Pot>();
 
+const emit = defineEmits<{
+  openDelete: [];
+}>();
+
 const showOptions = ref(false);
 
 const progress = computed(() => (props.total * 100) / props.target);
@@ -25,7 +29,9 @@ function toggleOptions() {
         <IconsIconEllipsis class="pot-options-toggler" />
         <menu v-if="showOptions" class="pot-options">
           <li class="pot-option">Edit Pot</li>
-          <li class="pot-option pot-option-delete">Delete Pot</li>
+          <li class="pot-option pot-option-delete" @click="emit('openDelete')">
+            Delete Pot
+          </li>
         </menu>
       </div>
     </header>

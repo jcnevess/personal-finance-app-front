@@ -1,12 +1,28 @@
 <script setup lang="ts">
-const props = defineProps<{ potName: string }>();
+const props = defineProps<{ potName: string; showModal: boolean }>();
+const emit = defineEmits<{ closeDelete: [] }>();
+
+const modal = useTemplateRef("modal");
+
+onUpdated(() => {
+  if (props.showModal) {
+    modal.value?.showModal();
+  } else {
+    modal.value?.close();
+  }
+});
 </script>
 
 <template>
-  <dialog class="modal">
+  <dialog ref="modal">
     <header>
       <h1>Delete '{{ props.potName }}'?</h1>
-      <div class="button-close" role="button" title="Close Modal">
+      <div
+        class="button-close"
+        role="button"
+        title="Close Modal"
+        @click="emit('closeDelete')"
+      >
         <IconsIconCloseModal />
       </div>
     </header>
@@ -28,13 +44,6 @@ header {
 
 p {
   font-size: 0.9rem;
-}
-
-.modal {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  display: none; /* FIXME development purposes */
 }
 
 .button-close {
