@@ -133,10 +133,12 @@ h2 {
 
 .control-button {
   flex-grow: 1;
+  color: black;
   background-color: var(--color-background-bright);
 }
 
-.control-button:hover {
+.control-button:hover,
+.control-button:active {
   background-color: white;
   outline: 1px solid var(--color-background-dark);
 }
