@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Pot } from "~/helpers/DTO";
 
-const props = defineProps<Pot>();
+const { pot } = defineProps<{ pot: Pot }>();
 
 const emit = defineEmits<{
   openDelete: [];
@@ -10,7 +10,7 @@ const emit = defineEmits<{
 
 const showOptions = ref(false);
 
-const progress = computed(() => (props.total * 100) / props.target);
+const progress = computed(() => (pot.total * 100) / pot.target);
 
 function formatDecimal(numberToFormat: number) {
   return numberToFormat.toFixed(2);
@@ -32,7 +32,7 @@ const defaultPot: Pot = {
   <article>
     <header>
       <div class="color-indicator" />
-      <h2>{{ props.name }}</h2>
+      <h2>{{ pot.name }}</h2>
       <div class="pot-menu" @click="toggleOptions">
         <IconsIconEllipsis class="pot-options-toggler" />
         <menu v-if="showOptions" class="pot-options">
@@ -49,7 +49,7 @@ const defaultPot: Pot = {
       <div class="total-saved">
         <p class="total-saved-text">Total Saved</p>
         <p class="total-saved-display">
-          {{ `\$${formatDecimal(props.total)}` }}
+          {{ `\$${formatDecimal(pot.total)}` }}
         </p>
       </div>
       <div class="meter">
@@ -61,7 +61,7 @@ const defaultPot: Pot = {
             {{ `${formatDecimal(progress)}%` }}
           </p>
           <p class="meter-target">
-            {{ `Target of \$${props.target.toLocaleString("en-US")}` }}
+            {{ `Target of \$${pot.target.toLocaleString("en-US")}` }}
           </p>
         </div>
       </div>
@@ -110,7 +110,7 @@ h2 {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: v-bind("props.theme");
+  background-color: v-bind("pot.theme");
 }
 
 .total-saved {
@@ -159,18 +159,9 @@ h2 {
   gap: 0.5rem;
 }
 
-.meter-bar {
-  background-color: var(--color-background-bright);
-  height: 8px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
 .meter-bar-indicator {
-  background-color: v-bind("props.theme");
+  background-color: v-bind("pot.theme");
   width: v-bind("`${progress}%`");
-  height: 100%;
-  border-radius: 5px;
 }
 
 .meter-percentage {

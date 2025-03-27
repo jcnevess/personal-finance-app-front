@@ -1,7 +1,7 @@
 :root {
   --color-background-dark: hsl(252, 7%, 13%);
   --color-background-bright: hsl(38, 36%, 96%);
-  --color-highlight: hsl(176, 46%, 35%);
+  --color-highlight: hsl(177, 52%, 32%);
   --color-text-primary: hsl(0, 0%, 70%);
   --color-text-secondary: black;
   --color-text-paragraph: hsl(0, 0%, 41%);
@@ -48,11 +48,7 @@ h2 {
 }
 
 dialog[open] {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
   margin: auto;
-  padding: 2rem;
   border: none;
   border-radius: 10px;
   max-width: 480px;
@@ -60,6 +56,20 @@ dialog[open] {
 
 dialog[open]::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 button {
@@ -83,7 +93,60 @@ button:hover {
   background-blend-mode: overlay;
 }
 
-.destructive-button {
+.button-destructive {
   background-color: var(--color-destructive-action);
   color: white;
+}
+
+.anchor {
+  position: relative;
+}
+
+.icon-clickable {
+  color: var(--color-text-paragraph);
+  cursor: pointer;
+  display: flex;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-control {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--color-text-paragraph);
+}
+
+.form-input {
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--color-background-dark);
+  line-height: 150%;
+  font-family: "PublicSans";
+}
+
+.form-input::placeholder {
+  font-family: "PublicSans";
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meter-bar {
+  background-color: var(--color-background-bright);
+  height: 8px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.meter-bar-indicator {
+  height: 100%;
+  border-radius: 5px;
 }

@@ -33,8 +33,8 @@ function addPot() {
 
 <template>
   <dialog ref="modal">
-    <div class="wrapper">
-      <div class="header">
+    <div class="dialog-wrapper">
+      <div class="dialog-header">
         <h1 v-if="pot !== undefined">Edit Pot</h1>
         <h1 v-else>Add New Pot</h1>
         <div
@@ -43,7 +43,7 @@ function addPot() {
           title="Close Modal"
           @click="emit('closeCompose')"
         >
-          <IconsIconCloseModal class="icon" />
+          <IconsIconCloseModal class="icon-clickable" />
         </div>
       </div>
       <p class="helper-text">
@@ -104,64 +104,6 @@ function addPot() {
 </template>
 
 <style scoped>
-dialog {
-  padding: 0;
-}
-
-.wrapper {
-  padding: 2rem;
-  overflow: auto;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.icon {
-  color: var(--color-text-paragraph);
-}
-
-.form-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-control {
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: var(--color-text-paragraph);
-}
-
-.form-input {
-  padding: 0.75rem 1rem;
-  border-radius: 5px;
-  border: 1px solid var(--color-background-dark);
-  line-height: 150%;
-  font-family: "PublicSans";
-}
-
-.form-input::placeholder {
-  font-family: "PublicSans";
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.form-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.icon {
-  cursor: pointer;
-}
-
 .form-select {
   appearance: none;
   background: url("~/assets/icons/icon-caret-down.svg") no-repeat 95%;
@@ -216,9 +158,5 @@ form {
 .theme-name {
   color: black;
   text-transform: capitalize;
-}
-
-.anchor {
-  position: relative;
 }
 </style>

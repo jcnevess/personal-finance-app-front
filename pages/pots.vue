@@ -42,10 +42,7 @@ function startAddPot() {
 
     <div class="pots">
       <PotView
-        name="Savings"
-        :target="2500"
-        :total="1500"
-        theme="green"
+        :pot="defaultPot!"
         @open-delete="openDeleteModal"
         @open-compose="openComposeModal"
       />
@@ -59,6 +56,7 @@ function startAddPot() {
         :show-modal="showComposeModal"
         @close-compose="closeComposeModal"
       />
+      <PotTransaction :pot="defaultPot!" />
     </div>
   </div>
 </template>

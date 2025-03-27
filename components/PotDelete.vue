@@ -15,23 +15,25 @@ onUpdated(() => {
 
 <template>
   <dialog ref="modal">
-    <header>
-      <h1>Delete '{{ props.potName }}'?</h1>
-      <div
-        class="button-close"
-        role="button"
-        title="Close Modal"
-        @click="emit('closeDelete')"
-      >
-        <IconsIconCloseModal />
-      </div>
-    </header>
-    <p>
-      Are you sure you want to delete this pot? This action cannot be reversed,
-      and all the data inside it will be removed forever.
-    </p>
-    <button class="destructive-button">Yes, Confirm Deletion</button>
-    <button>No, Go Back</button>
+    <div class="dialog-wrapper">
+      <header>
+        <h1>Delete '{{ props.potName }}'?</h1>
+        <div
+          class="button-close"
+          role="button"
+          title="Close Modal"
+          @click="emit('closeDelete')"
+        >
+          <IconsIconCloseModal />
+        </div>
+      </header>
+      <p>
+        Are you sure you want to delete this pot? This action cannot be
+        reversed, and all the data inside it will be removed forever.
+      </p>
+      <button class="button-destructive">Yes, Confirm Deletion</button>
+      <button>No, Go Back</button>
+    </div>
   </dialog>
 </template>
 
