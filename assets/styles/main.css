@@ -71,6 +71,7 @@ button {
   cursor: pointer;
   color: white;
   background-color: var(--color-background-dark);
+  font-family: "PublicSans";
 }
 
 button:hover {

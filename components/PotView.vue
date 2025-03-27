@@ -5,6 +5,7 @@ const props = defineProps<Pot>();
 
 const emit = defineEmits<{
   openDelete: [];
+  openCompose: [pot?: Pot];
 }>();
 
 const showOptions = ref(false);
@@ -18,6 +19,13 @@ function formatDecimal(numberToFormat: number) {
 function toggleOptions() {
   showOptions.value = !showOptions.value;
 }
+
+const defaultPot: Pot = {
+  name: "Savings",
+  target: 2500,
+  total: 1500,
+  theme: "green",
+};
 </script>
 
 <template>
@@ -28,7 +36,9 @@ function toggleOptions() {
       <div class="pot-menu" @click="toggleOptions">
         <IconsIconEllipsis class="pot-options-toggler" />
         <menu v-if="showOptions" class="pot-options">
-          <li class="pot-option">Edit Pot</li>
+          <li class="pot-option" @click="emit('openCompose', defaultPot)">
+            Edit Pot
+          </li>
           <li class="pot-option pot-option-delete" @click="emit('openDelete')">
             Delete Pot
           </li>
