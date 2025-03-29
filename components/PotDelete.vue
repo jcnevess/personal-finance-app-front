@@ -31,8 +31,10 @@ onUpdated(() => {
         Are you sure you want to delete this pot? This action cannot be
         reversed, and all the data inside it will be removed forever.
       </p>
-      <button class="button-destructive">Yes, Confirm Deletion</button>
-      <button>No, Go Back</button>
+      <button class="button-destructive" @click="emit('closeDelete')">
+        Yes, Confirm Deletion
+      </button>
+      <button @click="emit('closeDelete')">No, Go Back</button>
     </div>
   </dialog>
 </template>

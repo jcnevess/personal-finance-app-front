@@ -91,9 +91,9 @@ article {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   min-width: 425px;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 header {
@@ -170,6 +170,7 @@ h2 {
 
 .pot-options {
   position: absolute;
+  z-index: 1;
   top: 2rem;
   right: 0;
   list-style: none;

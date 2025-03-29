@@ -15,14 +15,6 @@ const emit = defineEmits<{ closeTransaction: [] }>();
 
 const modal = useTemplateRef("modal");
 
-onUpdated(() => {
-  if (showModal) {
-    modal.value?.showModal();
-  } else {
-    modal.value?.close();
-  }
-});
-
 const amount = ref<number | undefined>(undefined);
 
 const newAmmount = computed(() => {
@@ -37,9 +29,22 @@ const initialProportion = computed(() => pot.total / pot.target);
 const initialPercentageText = computed(
   () => (initialProportion.value * 100).toFixed(2) + "%"
 );
+
 const newProportion = computed(() => newAmmount.value / pot.target);
 const newPercentageText = computed(
   () => (newProportion.value * 100).toFixed(2) + "%"
+);
+
+watch(
+  () => showModal,
+  () => {
+    if (showModal) {
+      modal.value?.showModal();
+      amount.value = undefined;
+    } else {
+      modal.value?.close();
+    }
+  }
 );
 
 function formatDecimal(numberToFormat: number) {
@@ -92,7 +97,7 @@ function formatDecimal(numberToFormat: number) {
             <p class="meter-percentage">
               {{ newPercentageText }}
             </p>
-            <p class="meter-target">{{ `Target of \$${pot.target}` }}</p>
+            <p class="meter-target">{{ `Target of \$${pot?.target}` }}</p>
           </div>
         </div>
       </div>
