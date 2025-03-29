@@ -3,6 +3,9 @@ import type { Pot } from "~/helpers/DTO";
 
 const showDeleteModal = ref(false);
 const showComposeModal = ref(false);
+const showTransactionModal = ref(false);
+
+const withdrawalInProgress = ref(false);
 
 const defaultPot = ref<Pot | undefined>({
   name: "Savings",
@@ -27,6 +30,15 @@ function closeComposeModal() {
   showComposeModal.value = false;
 }
 
+function openTransactionModal(isWithdrawal: boolean) {
+  showTransactionModal.value = true;
+  withdrawalInProgress.value = isWithdrawal;
+}
+
+function closeTransactionModal() {
+  showTransactionModal.value = false;
+}
+
 function startAddPot() {
   defaultPot.value = undefined;
   openComposeModal();
@@ -45,6 +57,7 @@ function startAddPot() {
         :pot="defaultPot!"
         @open-delete="openDeleteModal"
         @open-compose="openComposeModal"
+        @open-transaction="openTransactionModal($event.isWithdrawal)"
       />
       <PotDelete
         pot-name="Savings"
@@ -56,7 +69,12 @@ function startAddPot() {
         :show-modal="showComposeModal"
         @close-compose="closeComposeModal"
       />
-      <PotTransaction :pot="defaultPot!" />
+      <PotTransaction
+        :pot="defaultPot!"
+        :show-modal="showTransactionModal"
+        :is-withdrawal="withdrawalInProgress"
+        @close-transaction="closeTransactionModal"
+      />
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ const { pot } = defineProps<{ pot: Pot }>();
 const emit = defineEmits<{
   openDelete: [];
   openCompose: [pot?: Pot];
+  openTransaction: [{ isWithdrawal: boolean }];
 }>();
 
 const showOptions = ref(false);
@@ -48,7 +49,7 @@ const defaultPot: Pot = {
     <main>
       <div class="total-saved">
         <p class="total-saved-text">Total Saved</p>
-        <p class="total-saved-display">
+        <p class="balance-display">
           {{ `\$${formatDecimal(pot.total)}` }}
         </p>
       </div>
@@ -66,8 +67,18 @@ const defaultPot: Pot = {
         </div>
       </div>
       <div class="controls">
-        <button class="control-button">+ Add Money</button>
-        <button class="control-button">Withdraw</button>
+        <button
+          class="control-button"
+          @click="emit('openTransaction', { isWithdrawal: false })"
+        >
+          + Add Money
+        </button>
+        <button
+          class="control-button"
+          @click="emit('openTransaction', { isWithdrawal: true })"
+        >
+          Withdraw
+        </button>
       </div>
     </main>
   </article>
@@ -123,12 +134,6 @@ h2 {
   font-size: 0.9rem;
 }
 
-.total-saved-display {
-  font-weight: bold;
-  font-size: 2rem;
-  color: black;
-}
-
 .meter-info {
   display: flex;
   justify-content: space-between;
@@ -153,24 +158,9 @@ h2 {
   outline: 1px solid var(--color-background-dark);
 }
 
-.meter {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
 .meter-bar-indicator {
   background-color: v-bind("pot.theme");
   width: v-bind("`${progress}%`");
-}
-
-.meter-percentage {
-  font-weight: bold;
-  font-size: 0.875rem;
-}
-
-.meter-target {
-  font-size: 0.75rem;
 }
 
 .pot-menu {

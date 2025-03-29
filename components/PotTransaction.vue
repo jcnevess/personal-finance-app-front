@@ -1,29 +1,62 @@
 <script setup lang="ts">
 import type { Pot } from "~/helpers/DTO";
 
-const { pot, isWithdrawal = true } = defineProps<{
+const {
+  pot,
+  isWithdrawal = false,
+  showModal,
+} = defineProps<{
   pot: Pot;
   isWithdrawal?: boolean;
+  showModal: boolean;
 }>();
+
+const emit = defineEmits<{ closeTransaction: [] }>();
+
+const modal = useTemplateRef("modal");
+
+onUpdated(() => {
+  if (showModal) {
+    modal.value?.showModal();
+  } else {
+    modal.value?.close();
+  }
+});
 
 const amount = ref<number | undefined>(undefined);
 
-const newAmmount = computed(() => pot.total + (amount.value ?? 0));
+const newAmmount = computed(() => {
+  if (isWithdrawal) {
+    return pot.total - (amount.value ?? 0);
+  } else {
+    return pot.total + (amount.value ?? 0);
+  }
+});
+
 const initialProportion = computed(() => pot.total / pot.target);
 const initialPercentageText = computed(
-  () => initialProportion.value * 100 + "%"
+  () => (initialProportion.value * 100).toFixed(2) + "%"
 );
 const newProportion = computed(() => newAmmount.value / pot.target);
-const newPercentageText = computed(() => newProportion.value * 100 + "%");
+const newPercentageText = computed(
+  () => (newProportion.value * 100).toFixed(2) + "%"
+);
+
+function formatDecimal(numberToFormat: number) {
+  return numberToFormat.toFixed(2);
+}
 </script>
 
 <template>
-  <dialog open>
+  <dialog ref="modal">
     <div class="dialog-wrapper">
       <div class="dialog-header">
         <h1 v-if="!isWithdrawal">Add to 'Savings'</h1>
         <h1 v-else>Withdraw from 'Savings'</h1>
-        <div class="button-close icon-clickable">
+        <div
+          class="button-close icon-clickable"
+          @click="emit('closeTransaction')"
+        >
           <IconsIconCloseModal />
         </div>
       </div>
@@ -32,21 +65,35 @@ const newPercentageText = computed(() => newProportion.value * 100 + "%");
       <div class="infos">
         <div class="info-header">
           <p>New Amount</p>
-          <p>{{ `\$${newAmmount}` }}</p>
+          <p class="info-amount balance-display">
+            {{ `\$${formatDecimal(newAmmount)}` }}
+          </p>
         </div>
 
         <div class="meter">
           <div class="meter-bar">
-            <div class="meter-bar-transaction" />
-            <div class="meter-bar-indicator" />
+            <div
+              class="meter-bar-transaction"
+              :class="{
+                'meter-bar-transaction-withdrawal': isWithdrawal,
+                'meter-bar-transaction-add': !isWithdrawal,
+              }"
+            />
+            <div
+              class="meter-bar-indicator"
+              :class="{
+                'meter-bar-indicator-withdrawal': isWithdrawal,
+                'meter-bar-indicator-add': !isWithdrawal,
+              }"
+            />
           </div>
-        </div>
 
-        <div class="info-footer">
-          <p class="info-percentage">
-            {{ newPercentageText }}
-          </p>
-          <p class="info-target">{{ `Target of \$${pot.target}` }}</p>
+          <div class="meter-footer">
+            <p class="meter-percentage">
+              {{ newPercentageText }}
+            </p>
+            <p class="meter-target">{{ `Target of \$${pot.target}` }}</p>
+          </div>
         </div>
       </div>
 
@@ -70,8 +117,12 @@ const newPercentageText = computed(() => newProportion.value * 100 + "%");
           />
         </div>
 
-        <button v-if="!isWithdrawal">Confirm Addition</button>
-        <button v-else>Confirm Withdrawal</button>
+        <button v-if="!isWithdrawal" @click="emit('closeTransaction')">
+          Confirm Addition
+        </button>
+        <button v-else @click="emit('closeTransaction')">
+          Confirm Withdrawal
+        </button>
       </form>
     </div>
   </dialog>
@@ -79,10 +130,18 @@ const newPercentageText = computed(() => newProportion.value * 100 + "%");
 
 <style scoped>
 .meter-bar-indicator {
-  background-color: var(--color-background-dark);
   width: v-bind("initialPercentageText");
   position: relative;
+}
+
+.meter-bar-indicator-add {
+  background-color: var(--color-background-dark);
   z-index: 1;
+}
+
+.meter-bar-indicator-withdrawal {
+  background-color: var(--color-destructive-action);
+  z-index: 0;
 }
 
 .meter-bar-transaction {
@@ -90,7 +149,33 @@ const newPercentageText = computed(() => newProportion.value * 100 + "%");
   position: absolute;
   border-radius: 5px;
   width: v-bind("newPercentageText");
+}
+
+.meter-bar-transaction-add {
   background-color: var(--color-highlight);
   z-index: 0;
+}
+
+.meter-bar-transaction-withdrawal {
+  background-color: var(--color-background-dark);
+  z-index: 1;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meter-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 </style>
