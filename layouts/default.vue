@@ -1,8 +1,13 @@
 <script setup lang="ts">
 const navbarHidden = ref(false);
+const route = useRoute();
 
 function toggleNavbar() {
   navbarHidden.value = !navbarHidden.value;
+}
+
+function currentPageIs(path: string) {
+  return path === route.path;
 }
 </script>
 
@@ -17,40 +22,54 @@ function toggleNavbar() {
           <LogoFinance :small-size="navbarHidden" />
         </div>
         <ul class="navbar-items">
-          <li class="navbar-item navbar-item-active">
-            <NuxtLink to="/" class="navbar-link">
-              <IconsIconNavOverview /><span class="navbar-item-text"
-                >Overview</span
-              ></NuxtLink
+          <li>
+            <NuxtLink
+              to="/"
+              class="navbar-link navbar-item"
+              :class="{ 'navbar-item-active': currentPageIs('/') }"
             >
-          </li>
-          <li class="navbar-item">
-            <NuxtLink to="/transactions" class="navbar-link">
-              <IconsIconNavTransactions /><span
-                to="/transactions"
-                class="navbar-item-text"
-                >Transactions</span
-              >
+              <IconsIconNavOverview />
+              <span class="navbar-item-text">Overview</span>
             </NuxtLink>
           </li>
-          <li class="navbar-item">
-            <NuxtLink to="/budgets" class="navbar-link">
+          <li>
+            <NuxtLink
+              to="/transactions"
+              class="navbar-link navbar-item"
+              :class="{ 'navbar-item-active': currentPageIs('/transactions') }"
+            >
+              <IconsIconNavTransactions />
+              <span class="navbar-item-text">Transactions</span>
+            </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink
+              to="/budgets"
+              class="navbar-link navbar-item"
+              :class="{ 'navbar-item-active': currentPageIs('/budgets') }"
+            >
               <IconsIconNavBudgets />
-              <div to="/budgets" class="navbar-item-text">Budgets</div>
+              <span class="navbar-item-text">Budgets</span>
             </NuxtLink>
           </li>
-          <li class="navbar-item">
-            <NuxtLink to="/pots" class="navbar-link">
+          <li>
+            <NuxtLink
+              to="/pots"
+              class="navbar-link navbar-item"
+              :class="{ 'navbar-item-active': currentPageIs('/pots') }"
+            >
               <IconsIconNavPots />
-              <div to="/pots" class="navbar-item-text">Pots</div>
+              <span class="navbar-item-text">Pots</span>
             </NuxtLink>
           </li>
-          <li class="navbar-item">
-            <NuxtLink to="/recurring" class="navbar-link">
+          <li>
+            <NuxtLink
+              to="/recurring"
+              class="navbar-link navbar-item"
+              :class="{ 'navbar-item-active': currentPageIs('/recurring') }"
+            >
               <IconsIconNavRecurringBills />
-              <div to="/recurring" class="navbar-item-text">
-                Recurring Bills
-              </div>
+              <span class="navbar-item-text">Recurring Bills</span>
             </NuxtLink>
           </li>
         </ul>
@@ -115,6 +134,7 @@ function toggleNavbar() {
 
 .navbar-items {
   flex-grow: 1;
+  list-style: none;
 }
 
 .navbar-item {
@@ -146,6 +166,7 @@ function toggleNavbar() {
   background-color: var(--color-background-bright);
   color: var(--color-text-secondary);
   border-left: 3px solid var(--color-highlight);
+  padding-left: calc(1.75rem - 3px);
   cursor: default;
 }
 
