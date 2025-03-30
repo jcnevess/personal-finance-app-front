@@ -94,7 +94,7 @@ function addPot() {
             @click="showThemeOptions = !showThemeOptions"
           >
             <span class="theme-color theme-color-selected" />
-            <span class="theme-name">{{ theme }}</span>
+            <span class="theme-name">{{ theme || "Green" }}</span>
           </button>
           <ul v-show="showThemeOptions" class="form-options">
             <ThemeOption
@@ -160,7 +160,7 @@ function addPot() {
 }
 
 .theme-color-selected {
-  background-color: v-bind("theme");
+  background-color: v-bind("theme || '#277c78'");
 }
 
 .theme-name {

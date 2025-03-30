@@ -70,10 +70,14 @@ function toggleNavbar() {
 <style>
 .container {
   display: flex;
-  height: 100dvh;
+  min-height: 100dvh;
+  background-color: var(--color-background-bright);
 }
 
 .lateral-bar {
+  height: 100dvh;
+  position: sticky;
+  top: 0;
   background-color: var(--color-background-dark);
   color: var(--color-text-primary);
   width: 20%;
@@ -91,10 +95,6 @@ function toggleNavbar() {
 
 .lateral-bar-collapsed .navbar-item-text {
   display: none;
-}
-
-.lateral-bar-collapsed .navbar-item {
-  padding: 1rem 1.75rem;
 }
 
 .navbar {
@@ -179,12 +179,12 @@ function toggleNavbar() {
 
 .lateral-bar-collapsed .navbar-hide svg {
   scale: 150%;
+  width: 100%;
 }
 
 .contents {
   padding: 2rem;
   flex-grow: 1;
-  background-color: var(--color-background-bright);
 }
 
 @media (max-width: 768px) {
