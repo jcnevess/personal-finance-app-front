@@ -111,12 +111,6 @@ button:hover {
   );
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
 .pots {
   display: grid;
   grid-template-columns: auto auto;

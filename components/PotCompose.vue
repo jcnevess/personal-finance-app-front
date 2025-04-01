@@ -113,46 +113,6 @@ function addPot() {
 </template>
 
 <style scoped>
-.form-select {
-  appearance: none;
-  background: url("~/assets/icons/icon-caret-down.svg") no-repeat 95%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: normal;
-}
-
-.form-options {
-  border-radius: 5px;
-  box-shadow: 0 0 5px black;
-  overflow: hidden;
-  position: absolute;
-  top: 120%;
-  background-color: white;
-  width: 100%;
-}
-
-.form-option {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.75rem 1rem;
-  line-height: 150%;
-  font-size: 0.9rem;
-  border-top: 1px solid var(--color-text-primary);
-}
-
-.form-option:hover,
-.form-option:active {
-  background-color: var(--color-background-bright);
-}
-
-.form-option:first-of-type {
-  border-top: unset;
-}
-
 .theme-color {
   width: 12px;
   height: 12px;
