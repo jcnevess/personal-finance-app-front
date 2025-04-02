@@ -5,6 +5,8 @@ const store = useAppStore();
 
 const showSortSelector = ref(false);
 const showCategorySelector = ref(false);
+
+const selectedSort = ref("Latest");
 const selectedCategory = ref("All Transactions");
 const selectedPage = ref(1);
 
@@ -36,7 +38,7 @@ const categoryOptions = [
 ];
 
 watch(
-  [selectedCategory, selectedPage],
+  [selectedCategory, selectedSort, selectedPage],
   () => {
     const filteredByCategory = store.getFilteredTransactions(
       selectedCategory.value
@@ -44,7 +46,12 @@ watch(
 
     numberOfTransactions.value = filteredByCategory.length;
 
-    displayedTransactions.value = filteredByCategory.filter(
+    const orderedTransactions = sortByCriteria(
+      filteredByCategory,
+      selectedSort.value
+    );
+
+    displayedTransactions.value = orderedTransactions.filter(
       (transaction, index) =>
         index >= (selectedPage.value - 1) * DISPLAYED_PER_PAGE &&
         index < selectedPage.value * DISPLAYED_PER_PAGE
@@ -88,6 +95,32 @@ function getFormattedAmount(amount: number) {
 function selectPage(pageNumber: number) {
   selectedPage.value = pageNumber;
 }
+
+function selectSort(sortType: string) {
+  selectedSort.value = sortType;
+  toggleSortSelector();
+}
+
+function sortByCriteria(list: Transaction[], sortType: string) {
+  switch (sortType) {
+    case "Oldest":
+      return list.toSorted(
+        (t1, t2) => new Date(t1.date).valueOf() - new Date(t2.date).valueOf()
+      );
+    case "A to Z":
+      return list.toSorted((t1, t2) => t1.name.localeCompare(t2.name));
+    case "Z to A":
+      return list.toSorted((t1, t2) => t2.name.localeCompare(t1.name));
+    case "Highest":
+      return list.toSorted((t1, t2) => t2.amount - t1.amount);
+    case "Lowest":
+      return list.toSorted((t1, t2) => t1.amount - t2.amount);
+    default:
+      return list.toSorted(
+        (t1, t2) => new Date(t2.date).valueOf() - new Date(t1.date).valueOf()
+      );
+  }
+}
 </script>
 
 <template>
@@ -110,14 +143,14 @@ function selectPage(pageNumber: number) {
         <div class="form-item anchor">
           <label class="form-control">Sort by</label>
           <button class="form-input form-select" @click="toggleSortSelector">
-            Latest
+            {{ selectedSort }}
           </button>
           <ul v-show="showSortSelector" class="form-options">
             <li
               v-for="option in sortOptions"
               :key="option"
               class="form-option"
-              @click="toggleSortSelector"
+              @click="selectSort(option)"
             >
               {{ option }}
             </li>
