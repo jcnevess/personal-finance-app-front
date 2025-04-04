@@ -56,8 +56,8 @@ function formatDecimal(numberToFormat: number) {
   <dialog ref="modal">
     <div class="dialog-wrapper">
       <div class="dialog-header">
-        <h1 v-if="!isWithdrawal">Add to 'Savings'</h1>
-        <h1 v-else>Withdraw from 'Savings'</h1>
+        <h1 v-if="!isWithdrawal">{{ `Add to '${pot.name}'` }}</h1>
+        <h1 v-else>{{ `Withdraw from '${pot.name}'` }}</h1>
         <div
           class="button-close icon-clickable"
           @click="emit('closeTransaction')"
@@ -110,16 +110,20 @@ function formatDecimal(numberToFormat: number) {
           <label v-else for="name" class="form-control"
             >Amount to Withdaw</label
           >
-          <input
-            v-model="amount"
-            id="amount"
-            type="number"
-            min="0"
-            name="amount"
-            placeholder="e.g. 50"
-            class="form-input transaction-amount"
-            autocomplete="off"
-          />
+          <div class="amount-input anchor">
+            <input
+              id="amount"
+              v-model="amount"
+              type="number"
+              min="0"
+              :max="isWithdrawal ? pot.total : pot.target - pot.total"
+              name="amount"
+              placeholder="e.g. 50"
+              class="form-input transaction-amount"
+              autocomplete="off"
+            />
+            <p class="dollar-sign">$</p>
+          </div>
         </div>
 
         <button v-if="!isWithdrawal" @click="emit('closeTransaction')">
@@ -182,5 +186,17 @@ function formatDecimal(numberToFormat: number) {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.dollar-sign {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+.transaction-amount {
+  width: 100%;
+  padding-left: 2rem;
 }
 </style>
