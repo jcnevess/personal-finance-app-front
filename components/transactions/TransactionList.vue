@@ -9,8 +9,10 @@ const showCategorySelector = ref(false);
 const selectedSort = ref("Latest");
 const selectedCategory = ref("All Transactions");
 const selectedPage = ref(1);
+const searchTerm = ref<string>();
 
 const numberOfTransactions = ref<number>(0);
+const transactionsFromCategory = ref<Transaction[]>();
 const displayedTransactions = ref<Transaction[]>();
 
 const DISPLAYED_PER_PAGE = 10;
@@ -38,16 +40,27 @@ const categoryOptions = [
 ];
 
 watch(
-  [selectedCategory, selectedSort, selectedPage],
+  [selectedCategory, searchTerm, selectedSort, selectedPage],
   () => {
-    const filteredByCategory = store.getFilteredTransactions(
+    transactionsFromCategory.value = store.getFilteredTransactions(
       selectedCategory.value
     );
 
-    numberOfTransactions.value = filteredByCategory.length;
+    let searchedTransactions = transactionsFromCategory.value;
+    if (searchTerm.value) {
+      const searchTermRegex = new RegExp(
+        String.raw`^${searchTerm.value}`,
+        "gi"
+      );
+      searchedTransactions = searchedTransactions.filter((transaction) =>
+        transaction.name.match(searchTermRegex)
+      );
+    }
+
+    numberOfTransactions.value = searchedTransactions.length;
 
     const orderedTransactions = sortByCriteria(
-      filteredByCategory,
+      searchedTransactions,
       selectedSort.value
     );
 
@@ -131,18 +144,28 @@ function sortByCriteria(list: Transaction[], sortType: string) {
 
     <div class="transaction-table">
       <div class="table-controls">
-        <input
-          id="transaction-searchbar"
-          type="search"
-          name="search"
-          class="form-input"
-          placeholder="Search transactions"
-          title="Search transactions"
-          autocomplete="false"
-        />
+        <div class="search-bar anchor">
+          <input
+            v-model="searchTerm"
+            id="transaction-searchbar"
+            type="input"
+            name="search"
+            class="form-input"
+            placeholder="Search transactions"
+            title="Search transactions"
+            autocomplete="false"
+          />
+
+          <IconsIconSearch class="icon-search" />
+        </div>
+
         <div class="form-item anchor">
           <label class="form-control">Sort by</label>
-          <button class="form-input form-select" @click="toggleSortSelector">
+          <button
+            class="form-input form-select"
+            title="Sort by"
+            @click="toggleSortSelector"
+          >
             {{ selectedSort }}
           </button>
           <ul v-show="showSortSelector" class="form-options">
@@ -161,6 +184,7 @@ function sortByCriteria(list: Transaction[], sortType: string) {
           <label for="" class="form-control">Category</label>
           <button
             class="form-input form-select"
+            title="Category"
             @click="toggleCategorySelector"
           >
             {{ selectedCategory }}
@@ -286,10 +310,6 @@ function sortByCriteria(list: Transaction[], sortType: string) {
   gap: 2rem;
 }
 
-#transaction-searchbar {
-  flex-grow: 1;
-}
-
 #transaction-searchbar::placeholder {
   font-size: 0.9rem;
 }
@@ -306,7 +326,7 @@ function sortByCriteria(list: Transaction[], sortType: string) {
 }
 
 .form-select {
-  padding-inline: 2rem;
+  padding-inline: 2rem 3rem;
 }
 
 .table-data {
@@ -421,5 +441,26 @@ td img {
 .pagination-arrow:active {
   color: black;
   border-color: black;
+}
+
+.form-input {
+  border-radius: 10px;
+  border-color: var(--color-text-primary);
+}
+
+.search-bar {
+  flex-grow: 1;
+}
+
+.icon-search {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-paragraph);
+}
+
+#transaction-searchbar {
+  width: 100%;
 }
 </style>
