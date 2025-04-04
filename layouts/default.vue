@@ -103,7 +103,7 @@ function currentPageIs(path: string) {
   min-width: 200px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 1.5rem 0.75rem 1.5rem 0;
+  padding: 2.5rem 0.75rem 2.5rem 0;
   user-select: none;
 }
 
@@ -187,7 +187,6 @@ function currentPageIs(path: string) {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
   border: none;
   background-color: transparent;
   color: var(--color-text-primary);
