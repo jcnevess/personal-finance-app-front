@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Transaction } from "~/helpers/DTO";
+import { getImageURI, sortTransactionsByCriteria } from "~/helpers/helpers";
 
 const store = useAppStore();
 
@@ -59,7 +60,7 @@ watch(
 
     numberOfTransactions.value = searchedTransactions.length;
 
-    const orderedTransactions = sortByCriteria(
+    const orderedTransactions = sortTransactionsByCriteria(
       searchedTransactions,
       selectedSort.value
     );
@@ -88,10 +89,6 @@ function selectCategory(category: string) {
   toggleCategorySelector();
 }
 
-function getImageURI(uri: string) {
-  return uri.slice(8);
-}
-
 function getFormattedDate(date: string) {
   const dateString = new Date(date).toDateString().split(" ");
   return `${dateString[2]} ${dateString[1]}, ${dateString[3]}`;
@@ -114,7 +111,7 @@ function selectSort(sortType: string) {
   toggleSortSelector();
 }
 
-function sortByCriteria(list: Transaction[], sortType: string) {
+/*function sortByCriteria(list: Transaction[], sortType: string) {
   switch (sortType) {
     case "Oldest":
       return list.toSorted(
@@ -133,7 +130,7 @@ function sortByCriteria(list: Transaction[], sortType: string) {
         (t1, t2) => new Date(t2.date).valueOf() - new Date(t1.date).valueOf()
       );
   }
-}
+}*/
 </script>
 
 <template>
@@ -217,7 +214,7 @@ function sortByCriteria(list: Transaction[], sortType: string) {
             :key="transaction.date"
           >
             <td>
-              <div class="transaction-client emphasis justify-start">
+              <div class="client-info emphasis justify-start">
                 <img
                   :src="getImageURI(transaction.avatar)"
                   :alt="transaction.name"
@@ -331,59 +328,16 @@ function sortByCriteria(list: Transaction[], sortType: string) {
 
 .table-data {
   width: 100%;
-  display: grid;
   grid-template-columns: 1fr 20% 20% 20%;
-  align-items: center;
-}
-
-thead,
-tbody {
-  display: contents;
 }
 
 tr {
-  display: grid;
-  grid-template-columns: subgrid;
   grid-column: 1 / span 4;
-  align-items: center;
 }
 
 tbody tr {
   border-top: 1px solid var(--color-text-primary);
   border-collapse: collapse;
-}
-
-td,
-th {
-  font-size: 0.75rem;
-  font-weight: normal;
-  padding: 0.75rem;
-  color: var(--color-text-paragraph);
-}
-
-td img {
-  width: 32px;
-  border-radius: 50%;
-}
-
-.transaction-client {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.emphasis {
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-}
-
-.justify-end {
-  justify-self: end;
-}
-
-.justify-start {
-  justify-self: start;
 }
 
 .table-pagination {

@@ -17,12 +17,9 @@ export const useAppStore = defineStore("app", () => {
     }
   }
 
-  /*function getSortedTransactions(sort: string) {
-    switch (sort) {
-      case "Oldest":
-        return transactions.value.toSorted((a, b) => {});
-    }
-  }*/
+  function getRecurringBills(): Transaction[] {
+    return transactions.value.filter((transaction) => transaction.recurring);
+  }
 
-  return { pots, transactions, getFilteredTransactions };
+  return { pots, transactions, getFilteredTransactions, getRecurringBills };
 });

@@ -227,3 +227,57 @@ form {
   flex-direction: column;
   gap: 2rem;
 }
+
+.table-data {
+  display: grid;
+  align-items: center;
+}
+
+thead,
+tbody {
+  display: contents;
+}
+
+tr {
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+}
+
+tbody tr {
+  border-top: 1px solid var(--color-text-primary);
+  border-collapse: collapse;
+}
+
+td,
+th {
+  font-size: 0.75rem;
+  font-weight: normal;
+  padding: 0.75rem;
+  color: var(--color-text-paragraph);
+}
+
+td img {
+  width: 32px;
+  border-radius: 50%;
+}
+
+.client-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emphasis {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.justify-end {
+  justify-self: end;
+}
+
+.justify-start {
+  justify-self: start;
+}
