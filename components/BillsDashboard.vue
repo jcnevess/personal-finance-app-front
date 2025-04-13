@@ -325,4 +325,12 @@ tbody tr {
   flex-direction: column;
   gap: 1rem;
 }
+
+@media (max-width: 880px) {
+  .grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 </style>

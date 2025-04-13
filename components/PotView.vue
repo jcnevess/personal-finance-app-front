@@ -95,7 +95,7 @@ article {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  min-width: 425px;
+  min-width: 300px;
   padding: 2rem;
 }
 

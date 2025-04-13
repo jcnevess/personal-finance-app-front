@@ -45,4 +45,10 @@ const budgets = ref(store.budgets);
   flex-direction: column;
   gap: 1.5rem;
 }
+
+@media (max-width: 880px) {
+  .content {
+    grid-template-columns: auto;
+  }
+}
 </style>

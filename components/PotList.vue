@@ -116,4 +116,10 @@ button:hover {
   grid-template-columns: auto auto;
   gap: 1.5rem;
 }
+
+@media (max-width: 880px) {
+  .pots {
+    grid-template-columns: auto;
+  }
+}
 </style>

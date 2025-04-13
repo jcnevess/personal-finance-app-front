@@ -91,11 +91,13 @@ function currentPageIs(path: string) {
   display: flex;
   min-height: 100dvh;
   background-color: var(--color-background-bright);
+  overflow: hidden;
 }
 
 .lateral-bar {
   height: 100dvh;
   position: sticky;
+  z-index: 1000;
   top: 0;
   background-color: var(--color-background-dark);
   color: var(--color-text-primary);
@@ -207,9 +209,59 @@ function currentPageIs(path: string) {
   flex-grow: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 880px) {
   .lateral-bar {
+    position: fixed;
+    bottom: 0;
+    top: unset;
+    height: auto;
+    width: 100%;
+    border-bottom-right-radius: unset;
+    border-top-left-radius: 10px;
+    padding: 1rem 0 0;
+  }
+
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-logo {
     display: none;
+  }
+
+  .navbar-items {
+    display: flex;
+    flex-grow: 0;
+  }
+
+  .navbar-item {
+    padding: 1rem;
+    border-bottom-right-radius: unset;
+    border-top-left-radius: 10px;
+  }
+
+  .navbar-item-active {
+    border-left: unset;
+    border-bottom: 5px solid var(--color-highlight);
+  }
+
+  .navbar-link svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .navbar-item-text {
+    display: none;
+  }
+
+  .navbar-hide {
+    display: none;
+  }
+
+  .contents {
+    margin-bottom: 78px; /* Navbar size */
   }
 }
 </style>
