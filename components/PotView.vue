@@ -34,13 +34,16 @@ const defaultPot: Pot = {
     <header>
       <div class="color-indicator" />
       <h2>{{ pot.name }}</h2>
-      <div class="pot-menu" @click="toggleOptions">
-        <IconsIconEllipsis class="pot-options-toggler" />
-        <menu v-if="showOptions" class="pot-options">
-          <li class="pot-option" @click="emit('openCompose', defaultPot)">
+      <div class="menu-wrapper" @click="toggleOptions">
+        <IconsIconEllipsis class="menu-options-toggler" />
+        <menu v-if="showOptions" class="menu-options">
+          <li class="menu-option" @click="emit('openCompose', defaultPot)">
             Edit Pot
           </li>
-          <li class="pot-option pot-option-delete" @click="emit('openDelete')">
+          <li
+            class="menu-option menu-option-delete"
+            @click="emit('openDelete')"
+          >
             Delete Pot
           </li>
         </menu>
@@ -161,39 +164,5 @@ h2 {
 .meter-bar-indicator {
   background-color: v-bind("pot.theme");
   width: v-bind("`${progress}%`");
-}
-
-.pot-menu {
-  position: relative;
-  cursor: pointer;
-}
-
-.pot-options {
-  position: absolute;
-  z-index: 1;
-  top: 2rem;
-  right: 0;
-  list-style: none;
-  background-color: white;
-  border-radius: 5px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  box-shadow: 0px 0px 8px var(--color-text-primary);
-}
-
-.pot-option {
-  cursor: pointer;
-  padding: 1rem;
-  font-size: 0.9rem;
-}
-
-.pot-option-delete {
-  color: var(--color-destructive-action);
-}
-
-.pot-option:hover {
-  background-color: var(--color-background-bright);
 }
 </style>

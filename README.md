@@ -20,15 +20,16 @@ We provide the data in a local `data.json` file, so use that to populate the con
 
 Your users should be able to:
 
-- See all of the personal finance app data at-a-glance on the overview page
-- View all transactions on the transactions page with pagination for every ten transactions
-- Search, sort, and filter transactions
+- ✔ See all of the personal finance app data at-a-glance on the overview page
+
+- ✔ View all transactions on the transactions page with pagination for every ten transactions
+- ✔ Search, sort, and filter transactions
 - Create, read, update, delete (CRUD) budgets and saving pots
 - View the latest three transactions for each budget category created
 - View progress towards each pot
 - Add money to and withdraw money from pots
-- View recurring bills and the status of each for the current month
-- Search and sort recurring bills
+- ✔ View recurring bills and the status of each for the current month
+- ✔ Search and sort recurring bills
 - Receive validation messages if required form fields aren't completed
 - Navigate the whole app and perform all actions using only their keyboard
 - View the optimal layout for the interface depending on their device's screen size
@@ -119,12 +120,12 @@ Remember, if you're looking for feedback on your solution, be sure to ask questi
 
 There are multiple places you can share your solution:
 
-1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community). 
+1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community).
 2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
 3. Share your solution on other social channels like LinkedIn.
 4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
+We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback.
 
 The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
 

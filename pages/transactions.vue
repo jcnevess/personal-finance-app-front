@@ -1,5 +1,3 @@
 <template>
-  <div>
-    <TransactionsTransactionList />
-  </div>
+  <TransactionsTransactionList />
 </template>

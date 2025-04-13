@@ -25,4 +25,22 @@ function sortTransactionsByCriteria(list: Transaction[], sortType: string) {
   }
 }
 
-export { getImageURI, sortTransactionsByCriteria };
+function getFormattedDate(date: string) {
+  const dateString = new Date(date).toDateString().split(" ");
+  return `${dateString[2]} ${dateString[1]}, ${dateString[3]}`;
+}
+
+function getFormattedAmount(amount: number) {
+  if (amount > 0) {
+    return `+ $${amount.toFixed(2)}`;
+  } else {
+    return `- $${amount.toFixed(2).slice(1)}`;
+  }
+}
+
+export {
+  getImageURI,
+  sortTransactionsByCriteria,
+  getFormattedAmount,
+  getFormattedDate,
+};

@@ -1,3 +1,3 @@
 <template>
-  <h1>Budgets</h1>
+  <BudgetDashboard />
 </template>
