@@ -234,10 +234,15 @@ function currentPageIs(path: string) {
   .navbar-items {
     display: flex;
     flex-grow: 0;
+    gap: 0.5rem;
   }
 
   .navbar-item {
-    padding: 1rem;
+    padding: clamp(
+      0.5rem,
+      calc(0.105rem + 1.975vw),
+      1rem
+    ); /* min: 8px, max: 16px */
     border-bottom-right-radius: unset;
     border-top-left-radius: 10px;
   }
@@ -262,6 +267,7 @@ function currentPageIs(path: string) {
 
   .contents {
     margin-bottom: 78px; /* Navbar size */
+    padding-inline: clamp(0.5rem, calc(-4.114rem + 21.818vw), 2rem);
   }
 }
 </style>

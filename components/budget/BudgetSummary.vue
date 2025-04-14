@@ -13,6 +13,7 @@ const { data, labels, colors } = defineProps<{
 const chartOptions = {
   chart: {
     id: "budget",
+    width: "80%",
   },
   labels: labels,
   dataLabels: {
@@ -29,6 +30,16 @@ const chartOptions = {
   },
   colors: colors,
   stroke: { show: false },
+  responsive: [
+    {
+      breakpoint: 420,
+      options: {
+        chart: {
+          width: "75%",
+        },
+      },
+    },
+  ],
 };
 
 const series = data;
@@ -37,7 +48,7 @@ const series = data;
 <template>
   <div class="summary">
     <ClientOnly>
-      <div class="anchor">
+      <div class="anchor chart-anchor">
         <apexchart type="donut" :options="chartOptions" :series="series" />
         <div class="inner-wheel">
           <div class="highlight">$338</div>
@@ -45,7 +56,7 @@ const series = data;
         </div>
       </div>
     </ClientOnly>
-    <div class="summary">
+    <div class="summary-info">
       <h2>Spending Summary</h2>
       <div class="categories">
         <div
@@ -68,6 +79,15 @@ const series = data;
 </template>
 
 <style>
+h2 {
+  margin-block: 1rem;
+}
+
+.chart-anchor {
+  width: min-content;
+  align-self: center;
+}
+
 .money-info {
   font-weight: bold;
 }
@@ -111,8 +131,8 @@ const series = data;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background-color: hwb(0 100% 0% / 0.5);
-  width: 235px;
-  height: 235px;
+  width: 60%;
+  aspect-ratio: 1;
   pointer-events: none;
   touch-action: none;
   display: flex;
@@ -128,8 +148,14 @@ const series = data;
 
 .summary {
   border-radius: 10px;
-  padding: 2rem;
+  padding: clamp(0.5rem, calc(-4.3rem + 24vw), 2rem);
   background-color: white;
   align-self: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.apexcharts-canvas {
+  margin: auto;
 }
 </style>

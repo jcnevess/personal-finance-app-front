@@ -165,4 +165,14 @@ h2 {
   background-color: v-bind("pot.theme");
   width: v-bind("`${progress}%`");
 }
+
+@media (max-width: 375px) {
+  article {
+    padding-inline: clamp(
+      1rem,
+      calc(-4.818rem + 29.091vw),
+      2rem
+    ); /* min: 16px, max: 32px */
+  }
+}
 </style>

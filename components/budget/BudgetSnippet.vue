@@ -105,6 +105,14 @@ function toggleOptionsMenu() {
 </template>
 
 <style scoped>
+p {
+  font-size: 0.75rem;
+}
+
+h2 {
+  margin-block: unset;
+}
+
 .menu-option:not(.menu-option-delete) {
   color: var(--color-text-paragraph);
 }
@@ -140,6 +148,10 @@ function toggleOptionsMenu() {
   padding-bottom: 0;
 }
 
+.client-info {
+  max-width: 150px;
+}
+
 .client-info img {
   width: 32px;
   border-radius: 50%;
@@ -170,7 +182,12 @@ function toggleOptionsMenu() {
 .latest-spendings {
   background-color: var(--color-background-bright);
   border-radius: 10px;
-  padding: 1rem;
+  padding-block: 1rem;
+  padding-inline: clamp(
+    0.5rem,
+    calc(-1.1rem + 8vw),
+    1rem
+  ); /* min: 8px, max: 16px */
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -220,7 +237,16 @@ function toggleOptionsMenu() {
 .card {
   background-color: white;
   border-radius: 10px;
-  padding: 2rem;
+  padding-block: clamp(
+    1rem,
+    calc(-2.2rem + 16vw),
+    2rem
+  ); /* min: 16px, max: 32px */
+  padding-inline: clamp(
+    0.5rem,
+    calc(-4.3rem + 24vw),
+    2rem
+  ); /* min: 8px, max: 32px */
   display: flex;
   flex-direction: column;
   gap: 1rem;

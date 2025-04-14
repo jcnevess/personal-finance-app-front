@@ -156,7 +156,7 @@ watch(
                   <IconsIconBillDue v-show="index > 6" />
                 </span>
               </td>
-              <td class="emphasis">
+              <td class="emphasis justify-end">
                 {{ getFormattedAmount(bill.amount) }}
               </td>
             </tr>
@@ -185,6 +185,10 @@ watch(
   grid-template-rows: auto 1fr;
   gap: 1.5rem;
   align-items: start;
+}
+
+.grid-item {
+  padding: clamp(0.5rem, calc(-2.5rem + 15vw), 2rem); /* min: 8px, max: 32px */
 }
 
 .summary-entry:not(:first-child) {
@@ -217,7 +221,6 @@ watch(
   gap: 1rem;
   border-radius: 10px;
   background-color: white;
-  padding: 2rem;
   grid-column: 1 / span 1;
 }
 
@@ -243,10 +246,18 @@ tbody tr {
   border-collapse: collapse;
 }
 
+td,
+th {
+  padding-inline: clamp(
+    0rem,
+    calc(-2.4rem + 12vw),
+    0.75rem
+  ); /* min: 0px, max: 12px */
+}
+
 .bills-list {
   background-color: white;
   border-radius: 10px;
-  padding: 2rem;
   grid-row: 1 / span 2;
   grid-column: 2;
 }
@@ -293,7 +304,7 @@ tbody tr {
 
 .form-select {
   padding-right: 3rem;
-  min-width: 120px;
+  min-width: 60px;
 }
 
 .search-box {
@@ -307,7 +318,6 @@ tbody tr {
 .total-view {
   border-radius: 10px;
   background-color: var(--color-background-dark);
-  padding: 2rem;
   color: white;
   font-size: 0.9rem;
   display: flex;
@@ -331,6 +341,12 @@ tbody tr {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+@media (max-width: 425px) {
+  .icon-search {
+    display: none;
   }
 }
 </style>
