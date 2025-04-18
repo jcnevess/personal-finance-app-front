@@ -53,7 +53,7 @@ function addPot() {
           title="Close Modal"
           @click="emit('closeCompose')"
         >
-          <IconsIconCloseModal class="icon-clickable" />
+          <IconCloseModal class="icon-clickable" />
         </div>
       </div>
       <p class="helper-text">

@@ -35,7 +35,7 @@ const defaultPot: Pot = {
       <div class="color-indicator" />
       <h2>{{ pot.name }}</h2>
       <div class="menu-wrapper" @click="toggleOptions">
-        <IconsIconEllipsis class="menu-options-toggler" />
+        <IconEllipsis class="menu-options-toggler" />
         <menu v-if="showOptions" class="menu-options">
           <li class="menu-option" @click="emit('openCompose', defaultPot)">
             Edit Pot

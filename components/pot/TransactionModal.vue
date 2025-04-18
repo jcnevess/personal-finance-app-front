@@ -62,7 +62,7 @@ function formatDecimal(numberToFormat: number) {
           class="button-close icon-clickable"
           @click="emit('closeTransaction')"
         >
-          <IconsIconCloseModal />
+          <IconCloseModal />
         </div>
       </div>
       <p v-if="!isWithdrawal">Add a new amount to yout pot.</p>

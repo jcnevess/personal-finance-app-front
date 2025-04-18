@@ -24,7 +24,7 @@ onUpdated(() => {
           title="Close Modal"
           @click="emit('closeDelete')"
         >
-          <IconsIconCloseModal />
+          <IconCloseModal />
         </div>
       </header>
       <p>

@@ -1,3 +1,3 @@
 <template>
-  <TransactionsTransactionList />
+  <TransactionList />
 </template>

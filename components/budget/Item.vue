@@ -48,7 +48,7 @@ function toggleOptionsMenu() {
     <p>{{ `Maximum of $${budget.maximum.toFixed(2)}` }}</p>
     <div class="meter">
       <div class="meter-bar">
-        <div class="meter-bar-indicator"></div>
+        <div class="meter-bar-indicator" />
       </div>
     </div>
     <div class="budget-infos">

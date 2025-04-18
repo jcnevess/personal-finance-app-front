@@ -124,7 +124,7 @@ function selectSort(sortType: string) {
             autocomplete="false"
           />
 
-          <IconsIconSearch class="icon-search" />
+          <IconSearch class="icon-search" />
         </div>
 
         <div class="form-item anchor">
@@ -214,7 +214,7 @@ function selectSort(sortType: string) {
           :disabled="selectedPage - 1 <= 0"
           @click="selectPage(selectedPage - 1)"
         >
-          <IconsIconCaretLeft />
+          <IconCaretLeft />
         </button>
         <div class="pagination-group">
           <div
@@ -254,7 +254,7 @@ function selectSort(sortType: string) {
           :disabled="numberOfTransactions / DISPLAYED_PER_PAGE <= selectedPage"
           @click="selectPage(selectedPage + 1)"
         >
-          <IconsIconCaretRight />
+          <IconCaretRight />
         </button>
       </div>
     </div>

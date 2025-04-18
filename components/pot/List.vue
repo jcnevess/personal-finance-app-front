@@ -63,7 +63,7 @@ function startAddPot() {
     </header>
 
     <div class="pots">
-      <PotView
+      <PotItem
         v-for="pot in store.pots"
         :key="pot.name"
         :pot="pot"
@@ -71,17 +71,17 @@ function startAddPot() {
         @open-compose="openComposeModal(pot)"
         @open-transaction="openTransactionModal($event.isWithdrawal, pot)"
       />
-      <PotDelete
+      <PotDeleteModal
         pot-name="Savings"
         :show-modal="showDeleteModal"
         @close-delete="closeDeleteModal"
       />
-      <PotCompose
+      <PotComposerModal
         :pot="currentPot"
         :show-modal="showComposeModal"
         @close-compose="closeComposeModal"
       />
-      <PotTransaction
+      <PotTransactionModal
         :pot="currentPot || defaultPot"
         :show-modal="showTransactionModal"
         :is-withdrawal="withdrawalInProgress"

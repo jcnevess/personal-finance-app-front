@@ -16,7 +16,7 @@ const budgets = ref(store.budgets);
         :colors="budgets.map((bud) => bud.theme)"
       />
       <div class="budgets">
-        <BudgetSnippet
+        <BudgetItem
           v-for="budget in budgets"
           :key="budget.category"
           :budget

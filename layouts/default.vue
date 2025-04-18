@@ -28,7 +28,7 @@ function currentPageIs(path: string) {
               class="navbar-link navbar-item"
               :class="{ 'navbar-item-active': currentPageIs('/') }"
             >
-              <IconsIconNavOverview />
+              <IconNavOverview />
               <span class="navbar-item-text">Overview</span>
             </NuxtLink>
           </li>
@@ -38,7 +38,7 @@ function currentPageIs(path: string) {
               class="navbar-link navbar-item"
               :class="{ 'navbar-item-active': currentPageIs('/transactions') }"
             >
-              <IconsIconNavTransactions />
+              <IconNavTransactions />
               <span class="navbar-item-text">Transactions</span>
             </NuxtLink>
           </li>
@@ -48,7 +48,7 @@ function currentPageIs(path: string) {
               class="navbar-link navbar-item"
               :class="{ 'navbar-item-active': currentPageIs('/budgets') }"
             >
-              <IconsIconNavBudgets />
+              <IconNavBudgets />
               <span class="navbar-item-text">Budgets</span>
             </NuxtLink>
           </li>
@@ -58,7 +58,7 @@ function currentPageIs(path: string) {
               class="navbar-link navbar-item"
               :class="{ 'navbar-item-active': currentPageIs('/pots') }"
             >
-              <IconsIconNavPots />
+              <IconNavPots />
               <span class="navbar-item-text">Pots</span>
             </NuxtLink>
           </li>
@@ -68,14 +68,14 @@ function currentPageIs(path: string) {
               class="navbar-link navbar-item"
               :class="{ 'navbar-item-active': currentPageIs('/recurring') }"
             >
-              <IconsIconNavRecurringBills />
+              <IconNavRecurringBills />
               <span class="navbar-item-text">Recurring Bills</span>
             </NuxtLink>
           </li>
         </ul>
         <button class="navbar-hide navbar-item" @click="toggleNavbar">
-          <IconsIconCaretRight v-if="navbarHidden" />
-          <IconsIconMinimizeMenu v-else />
+          <IconCaretRight v-if="navbarHidden" />
+          <IconMinimizeMenu v-else />
           <span class="navbar-item-text">Minimize Menu</span>
         </button>
       </nav>
