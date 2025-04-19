@@ -61,6 +61,7 @@ const recurringBillsTotals = computed(() => {
 <template>
   <div class="wrapper">
     <h1>Overview</h1>
+
     <section class="balance-cards">
       <div
         v-for="[balanceName, balanceValue] in Object.entries(balance)"
@@ -76,123 +77,131 @@ const recurringBillsTotals = computed(() => {
       </div>
     </section>
 
-    <section class="preview pots-preview">
-      <div class="preview-header">
-        <h2>Pots</h2>
-        <NuxtLink to="/pots" class="link">
-          See Details <IconCaretRight
-        /></NuxtLink>
-      </div>
-      <div class="pots-body">
-        <div class="pots-highlight">
-          <IconPot class="pot-icon" />
-          <div class="highlight-info">
-            <p>Total Saved</p>
-            <p class="highlighted-amount">{{ `$${totalSavedPots}` }}</p>
+    <div class="section-container">
+      <div class="container-fold">
+        <section class="preview pots-preview">
+          <div class="preview-header">
+            <h2>Pots</h2>
+            <NuxtLink to="/pots" class="link">
+              See Details <IconCaretRight
+            /></NuxtLink>
           </div>
-        </div>
-        <div class="pot-items">
-          <div
-            v-for="pot of orderedPots.slice(0, 4)"
-            :key="pot.name"
-            class="pot-item"
-          >
-            <div class="color-bar" :data-color="pot.theme" />
-            <div class="pot-info">
-              <p class="pot-title">{{ pot.name }}</p>
-              <p class="emphasis">{{ `$${pot.total}` }}</p>
+          <div class="pots-body">
+            <div class="pots-highlight">
+              <IconPot class="pot-icon" />
+              <div class="highlight-info">
+                <p>Total Saved</p>
+                <p class="highlighted-amount">{{ `$${totalSavedPots}` }}</p>
+              </div>
+            </div>
+            <div class="pot-items">
+              <div
+                v-for="pot of orderedPots.slice(0, 4)"
+                :key="pot.name"
+                class="pot-item"
+              >
+                <div class="color-bar" :data-color="pot.theme" />
+                <div class="pot-info">
+                  <p class="pot-title">{{ pot.name }}</p>
+                  <p class="emphasis">{{ `$${pot.total}` }}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section class="preview budgets-preview">
-      <div class="preview-header">
-        <h2>Budgets</h2>
-        <NuxtLink to="/budgets" class="link"
-          >See Details <IconCaretRight
-        /></NuxtLink>
-      </div>
-      <div class="budgets-body">
-        <BudgetGraph
-          :data="monthlyBudgets.map((bud) => bud.monthlyExpenses)"
-          :labels="monthlyBudgets.map((bud) => bud.category)"
-          :colors="monthlyBudgets.map((bud) => bud.theme)"
-        />
-        <div class="budgets">
-          <div
-            v-for="budget of monthlyBudgets"
-            :key="budget.category"
-            class="budget"
-          >
-            <div class="color-bar" :data-color="budget.theme" />
-            <div class="budget-info">
-              <p class="budget-title">{{ budget.category }}</p>
-              <p class="emphasis">{{ `$${budget.monthlyExpenses}` }}</p>
-            </div>
+        <section class="preview transactions-preview">
+          <div class="preview-header">
+            <h2>Transactions</h2>
+            <NuxtLink to="/transactions" class="link"
+              >View All <IconCaretRight
+            /></NuxtLink>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="preview transactions-preview">
-      <div class="preview-header">
-        <h2>Transactions</h2>
-        <NuxtLink to="/transactions" class="link"
-          >View All <IconCaretRight
-        /></NuxtLink>
-      </div>
-      <div class="transactions">
-        <div
-          v-for="transaction of lastTransactions"
-          :key="transaction.category"
-          class="transaction"
-        >
-          <div class="client-info">
-            <img
-              :src="getImageURI(transaction.avatar)"
-              :alt="transaction.name"
-            />
-            <div class="client-name">{{ transaction.name }}</div>
-          </div>
-          <div class="transaction-info">
-            <p
-              class="emphasis"
-              :class="{
-                income: transaction.amount >= 0,
-                expense: transaction.amount < 0,
-              }"
+          <div class="transactions">
+            <div
+              v-for="transaction of lastTransactions"
+              :key="transaction.category"
+              class="transaction"
             >
-              {{ getFormattedAmount(transaction.amount) }}
-            </p>
-            <p class="transaction-date">
-              {{ getFormattedDate(transaction.date) }}
-            </p>
+              <div class="client-info">
+                <img
+                  :src="getImageURI(transaction.avatar)"
+                  :alt="transaction.name"
+                />
+                <div class="client-name">{{ transaction.name }}</div>
+              </div>
+              <div class="transaction-info">
+                <p
+                  class="emphasis"
+                  :class="{
+                    income: transaction.amount >= 0,
+                    expense: transaction.amount < 0,
+                  }"
+                >
+                  {{ getFormattedAmount(transaction.amount) }}
+                </p>
+                <p class="transaction-date">
+                  {{ getFormattedDate(transaction.date) }}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
-    </section>
 
-    <section class="preview preview-bills">
-      <div class="preview-header">
-        <h2>Recurring Bills</h2>
-        <NuxtLink to="/recurring" class="link"
-          >See Details <IconCaretRight
-        /></NuxtLink>
+      <div class="container-fold">
+        <section class="preview budgets-preview">
+          <div class="preview-header">
+            <h2>Budgets</h2>
+            <NuxtLink to="/budgets" class="link"
+              >See Details <IconCaretRight
+            /></NuxtLink>
+          </div>
+          <div class="budgets-body">
+            <BudgetGraph
+              :data="monthlyBudgets.map((bud) => bud.monthlyExpenses)"
+              :labels="monthlyBudgets.map((bud) => bud.category)"
+              :colors="monthlyBudgets.map((bud) => bud.theme)"
+            />
+            <div class="budgets">
+              <div
+                v-for="budget of monthlyBudgets"
+                :key="budget.category"
+                class="budget"
+              >
+                <div class="color-bar" :data-color="budget.theme" />
+                <div class="budget-info">
+                  <p class="budget-title">{{ budget.category }}</p>
+                  <p class="emphasis">{{ `$${budget.monthlyExpenses}` }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="preview preview-bills">
+          <div class="preview-header">
+            <h2>Recurring Bills</h2>
+            <NuxtLink to="/recurring" class="link"
+              >See Details <IconCaretRight
+            /></NuxtLink>
+          </div>
+          <div class="recurring-cards">
+            <div
+              v-for="total of recurringBillsTotals"
+              :key="total.label"
+              class="recurring-card"
+              :data-theme="total.theme"
+            >
+              <p>{{ total.label }}</p>
+              <p class="emphasis">
+                {{ getFormattedAmount(total.value).slice(1) }}
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="recurring-cards">
-        <div
-          v-for="total of recurringBillsTotals"
-          :key="total.label"
-          class="recurring-card"
-          :data-theme="total.theme"
-        >
-          <p>{{ total.label }}</p>
-          <p class="emphasis">{{ getFormattedAmount(total.value).slice(1) }}</p>
-        </div>
-      </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -219,7 +228,7 @@ h2 {
 }
 
 .balance-card h2 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: normal;
   margin: 0 0 1rem;
   text-transform: capitalize;
@@ -232,12 +241,16 @@ h2 {
 }
 
 .preview {
-  padding: 2rem;
+  padding: clamp(
+    1.5rem,
+    calc(-0.133rem + 2.37vw),
+    2rem
+  ); /* min: 16px, max: 32px */
   background-color: white;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .preview-header {
@@ -256,19 +269,29 @@ h2 {
   font-size: 0.9rem;
 }
 
+.pots-preview {
+  /*max-width: 480px;*/
+}
+
 .pots-body {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .pots-highlight {
   background-color: var(--color-background-bright);
-  padding: 1.5rem;
+  padding: clamp(
+    1rem,
+    calc(-0.571rem + 2.857vw),
+    2rem
+  ); /* min: 16px, max: 32px */
   border-radius: 10px;
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  flex-grow: 1;
 }
 
 .pot-icon {
@@ -282,15 +305,16 @@ h2 {
 }
 
 .pot-items {
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content;
   gap: 1rem;
+  flex-grow: 1;
 }
 
 .pot-item {
   display: flex;
   gap: 1rem;
   align-items: center;
-  min-width: 120px;
 }
 
 .pot-item .color-bar {
@@ -307,21 +331,28 @@ h2 {
   font-size: 0.75rem;
 }
 
+.budgets-preview {
+  min-width: 540px;
+}
+
 .budgets-body {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .budgets {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
 .budget {
   display: flex;
   gap: 0.75rem;
+  overflow: hidden;
 }
 
 .budget-info {
@@ -382,7 +413,7 @@ h2 {
 .recurring-cards {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .recurring-card {
@@ -392,6 +423,49 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-left: 4px solid attr(data-theme type(<color>), red);
+  border-left: 4px solid attr(data-theme type(<color>), black);
+}
+
+.section-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.container-fold {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+.color-bar {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .balance-cards {
+    flex-direction: column;
+  }
+
+  .pots-body {
+    flex-direction: column;
+  }
+
+  .budgets {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .budgets-body {
+    flex-direction: column;
+  }
+
+  .budgets-preview {
+    min-width: unset;
+  }
+
+  .pot-items {
+    grid-template-columns: auto auto;
+  }
 }
 </style>

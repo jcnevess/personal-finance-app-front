@@ -8,7 +8,7 @@ const { data, labels, colors } = defineProps<{
 const chartOptions = {
   chart: {
     id: "budget",
-    width: "80%",
+    width: "75%",
   },
   labels: labels,
   dataLabels: {
@@ -30,7 +30,7 @@ const chartOptions = {
       breakpoint: 420,
       options: {
         chart: {
-          width: "75%",
+          width: "70%",
         },
       },
     },
