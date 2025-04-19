@@ -317,3 +317,13 @@ td img {
 .menu-option:hover {
   background-color: var(--color-background-bright);
 }
+
+.color-bar {
+  width: 5px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: attr(
+    data-color type(<color>),
+    var(--color-background-dark)
+  );
+}

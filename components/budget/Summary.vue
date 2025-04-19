@@ -47,15 +47,7 @@ const series = data;
 
 <template>
   <div class="summary">
-    <ClientOnly>
-      <div class="anchor chart-anchor">
-        <apexchart type="donut" :options="chartOptions" :series="series" />
-        <div class="inner-wheel">
-          <div class="highlight">$338</div>
-          <p>of $975 limit</p>
-        </div>
-      </div>
-    </ClientOnly>
+    <BudgetGraph :data :labels :colors />
     <div class="summary-info">
       <h2>Spending Summary</h2>
       <div class="categories">
@@ -83,11 +75,6 @@ h2 {
   margin-block: 1rem;
 }
 
-.chart-anchor {
-  width: min-content;
-  align-self: center;
-}
-
 .money-info {
   font-weight: bold;
 }
@@ -112,40 +99,6 @@ h2 {
   flex-grow: 1;
 }
 
-.color-bar {
-  width: 5px;
-  height: 20px;
-  border-radius: 3px;
-  background-color: attr(data-color type(<color>), red);
-}
-
-.highlight {
-  font-size: 1.75rem;
-  font-weight: bold;
-}
-
-.inner-wheel {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background-color: hwb(0 100% 0% / 0.5);
-  width: 60%;
-  aspect-ratio: 1;
-  pointer-events: none;
-  touch-action: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.inner-wheel p {
-  font-size: 0.75rem;
-}
-
 .summary {
   border-radius: 10px;
   padding: clamp(0.5rem, calc(-4.3rem + 24vw), 2rem);
@@ -153,9 +106,5 @@ h2 {
   align-self: start;
   display: flex;
   flex-direction: column;
-}
-
-.apexcharts-canvas {
-  margin: auto;
 }
 </style>

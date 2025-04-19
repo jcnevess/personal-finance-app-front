@@ -7,6 +7,7 @@ export const useAppStore = defineStore("app", () => {
   const pots = ref<Pot[]>(database.pots);
   const transactions = ref<Transaction[]>(database.transactions);
   const budgets = ref<Budget[]>(database.budgets);
+  const balance = ref(database.balance);
 
   function getFilteredTransactions(filter: string): Transaction[] {
     if (filter === "All Transactions") {
@@ -20,6 +21,26 @@ export const useAppStore = defineStore("app", () => {
 
   function getRecurringBills(): Transaction[] {
     return transactions.value.filter((transaction) => transaction.recurring);
+  }
+
+  function getRecurringBillsSummary(date: string) {
+    const recurring = getRecurringBills();
+    const referenceDate = new Date(date);
+    const paid = recurring.filter(
+      (bill) => new Date(bill.date).valueOf() < referenceDate.valueOf()
+    );
+    const upcoming = recurring.filter(
+      (bill) => new Date(bill.date).valueOf() >= referenceDate.valueOf()
+    );
+    const dueSoon = recurring.filter((bill) => {
+      const billDate = new Date(bill.date);
+      return (
+        billDate.valueOf() >= referenceDate.valueOf() &&
+        billDate.valueOf() <= referenceDate.valueOf() + 1000 * 60 * 60 * 24 * 5
+      ); //Is within 5 days from now
+    });
+
+    return { paid: paid, upcoming: upcoming, dueSoon: dueSoon };
   }
 
   function getTransactionsFromBudget(budgetCategory: string) {
@@ -43,7 +64,7 @@ export const useAppStore = defineStore("app", () => {
     const condensedBudget = budgets.value.map((budget) => {
       return {
         ...budget,
-        monthlyExpenses: monthlyTransactionsByCat[budget.category],
+        monthlyExpenses: -1 * monthlyTransactionsByCat[budget.category],
       };
     });
 
@@ -54,9 +75,11 @@ export const useAppStore = defineStore("app", () => {
     pots,
     transactions,
     budgets,
+    balance,
     getFilteredTransactions,
     getRecurringBills,
     getTransactionsFromBudget,
     getMonthlyBudgetSummary,
+    getRecurringBillsSummary,
   };
 });
