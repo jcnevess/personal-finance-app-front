@@ -91,7 +91,6 @@ function currentPageIs(path: string) {
   display: flex;
   min-height: 100dvh;
   background-color: var(--color-background-bright);
-  overflow: hidden;
 }
 
 .lateral-bar {
