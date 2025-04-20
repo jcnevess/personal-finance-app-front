@@ -2,6 +2,10 @@
 const navbarHidden = ref(false);
 const route = useRoute();
 
+useSeoMeta({
+  title: () => route.meta.title,
+});
+
 function toggleNavbar() {
   navbarHidden.value = !navbarHidden.value;
 }

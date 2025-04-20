@@ -5,6 +5,8 @@ import {
   getImageURI,
 } from "~/helpers/helpers";
 
+definePageMeta({ title: "Finance" });
+
 const store = useAppStore();
 const { balance, pots, transactions } = storeToRefs(store);
 const monthlyBudgets = ref(store.getMonthlyBudgetSummary(7));

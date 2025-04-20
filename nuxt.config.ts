@@ -10,4 +10,9 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/styles/main.css"],
   modules: ["@nuxt/eslint", "@nuxt/image", "@pinia/nuxt"],
+  app: {
+    head: {
+      title: "Finance",
+    },
+  },
 });
