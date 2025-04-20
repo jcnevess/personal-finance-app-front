@@ -6,6 +6,12 @@ useSeoMeta({
   title: () => route.meta.title,
 });
 
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+});
+
 function toggleNavbar() {
   navbarHidden.value = !navbarHidden.value;
 }
